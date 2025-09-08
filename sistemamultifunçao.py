@@ -35,20 +35,20 @@ def main(page: ft.Page):
         page.update()  
 
     def remover_arquivo(e):
+        texto_2 = texto_recebido_2.value
+        caminho_arquivo = os.path.join(texto_pasta, texto_2)
         try:
-            texto_2 = texto_recebido_2.value
-            caminho_arquivo = os.path.join(texto_pasta, texto_2)
             if os.path.exists(caminho_arquivo):
                 os.remove(caminho_arquivo)
                 informativo.value = f"Arquivo '{texto_2}' removido!"
-                informativo.color = "green"
+                informativo.color = "Red"
             else:
                 informativo.value = f"Arquivo '{texto_2}' não existe."
-                informativo.color = "gray"
+                informativo.color = "Red"
         except Exception as erro:
             informativo.value = f"Erro ao remover arquivo: {erro}"
             informativo.color = "red"
-    page.update()
+        page.update()
 
     
     def criar_arquivo(e):
