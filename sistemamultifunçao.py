@@ -1,5 +1,6 @@
 import os
 import flet as ft
+texto_pasta=""
 
 def main(page: ft.Page):
     page.title = "Gerenciador de arquivos"
@@ -52,11 +53,18 @@ def main(page: ft.Page):
 
     
     def criar_arquivo(e):
+        texto_2 = texto_recebido_2.value 
         try:
-            texto_2 = texto_recebido_2.value
-            open(f"{texto_pasta}/{texto_2}", "w").close()
-            informativo.value = f"Arquivo criado: '{texto_2}'"
-            informativo.color = "black"
+            if texto_pasta =="" :
+                open(f"{texto_2}", "w").close()
+            else:
+                open(f"{texto_pasta}/{texto_2}", "w").close()
+                
+                informativo.value = f"Arquivo criado: '{texto_2}'"
+                informativo.color = "black"
+        except FileExistsError:
+            informativo.value = f"O arquivo '{texto_2}' já existe."
+            informativo.color = "red"
         except Exception as erro:
             informativo.value = f"Erro ao criar arquivo: {erro}"
             informativo.color = "red"
